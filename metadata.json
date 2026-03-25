@@ -1,0 +1,7 @@
+{
+  "name": "Daily Devotional",
+  "description": "A digital sanctuary for daily meditation, scripture reflection, and spiritual journaling.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}

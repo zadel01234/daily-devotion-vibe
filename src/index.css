@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400&family=Manrope:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-headline: "Noto Serif", serif;
+  --font-body: "Manrope", sans-serif;
+  --font-label: "Manrope", sans-serif;
+
+  --color-primary: #516353;
+  --color-on-primary: #ffffff;
+  --color-primary-container: #849684;
+  --color-on-primary-container: #1e2e21;
+  
+  --color-secondary: #675d50;
+  --color-on-secondary: #ffffff;
+  --color-secondary-container: #efe0cf;
+  --color-on-secondary-container: #6e6355;
+
+  --color-tertiary: #51606e;
+  --color-on-tertiary: #ffffff;
+  --color-tertiary-container: #8493a2;
+  --color-on-tertiary-container: #1d2c38;
+
+  --color-background: #fcf9f4;
+  --color-on-background: #1c1c19;
+  --color-surface: #fcf9f4;
+  --color-on-surface: #1c1c19;
+  --color-surface-variant: #e5e2dd;
+  --color-on-surface-variant: #434843;
+  --color-outline: #747872;
+  --color-outline-variant: #c3c8c1;
+
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1rem;
+  --radius-3xl: 1.5rem;
+  --radius-4xl: 2rem;
+  --radius-full: 9999px;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-on-surface font-body;
+  }
+
+  .font-headline {
+    font-family: var(--font-headline);
+  }
+
+  .font-body {
+    font-family: var(--font-body);
+  }
+
+  .font-label {
+    font-family: var(--font-label);
+  }
+}
+
+@layer utilities {
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  
+  .vertical-rl {
+    writing-mode: vertical-rl;
+  }
+
+  .breath-pulse {
+    animation: breath 8s ease-in-out infinite;
+  }
+
+  @keyframes breath {
+    0%, 100% { transform: scale(1); opacity: 0.4; }
+    50% { transform: scale(1.1); opacity: 0.7; }
+  }
+
+  /* Theme overrides */
+  .theme-dark {
+    --color-background: #0e0e0e;
+    --color-on-background: #e7e5e5;
+    --color-surface: #0e0e0e;
+    --color-on-surface: #e7e5e5;
+    --color-surface-variant: #252626;
+    --color-on-surface-variant: #acabaa;
+    --color-primary: #bdcab7;
+    --color-on-primary: #384335;
+    --color-primary-container: #3e4a3b;
+    --color-on-primary-container: #c7d4c0;
+    --color-outline: #767575;
+    --color-outline-variant: #484848;
+  }
+
+  .theme-sepia {
+    --color-background: #f4ead5;
+    --color-on-background: #433422;
+    --color-surface: #f4ead5;
+    --color-on-surface: #433422;
+    --color-surface-variant: #e6d5b8;
+    --color-on-surface-variant: #5f4b32;
+    --color-primary: #705d38;
+    --color-on-primary: #ffffff;
+    --color-primary-container: #d9c5a0;
+    --color-on-primary-container: #281e0a;
+  }
+}

@@ -37,6 +37,18 @@
   --radius-full: 9999px;
 }
 
+:root[data-font-size="small"] {
+  font-size: 14px;
+}
+
+:root[data-font-size="standard"] {
+  font-size: 16px;
+}
+
+:root[data-font-size="large"] {
+  font-size: 18px;
+}
+
 @layer base {
   body {
     @apply bg-background text-on-surface font-body;
@@ -56,6 +68,10 @@
 }
 
 @layer utilities {
+  .pt-safe {
+    padding-top: env(safe-area-inset-top);
+  }
+
   .pb-safe {
     padding-bottom: env(safe-area-inset-bottom);
   }

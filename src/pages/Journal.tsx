@@ -1,105 +1,344 @@
+import React from 'react';
+import { 
+  View, 
+  Text, 
+  Image, 
+  TouchableOpacity, 
+  ScrollView, 
+  StyleSheet,
+  Dimensions
+} from 'react-native';
 import { motion } from 'motion/react';
-import { Plus, MoreHorizontal, Book, Sprout, ChevronDown } from 'lucide-react';
+import { Plus, MoreHorizontal, Book, Sprout, ChevronDown } from 'lucide-react-native';
+
+const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
 export default function Journal() {
   return (
-    <motion.div 
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      className="max-w-4xl mx-auto px-6"
-    >
-      {/* Header */}
-      <header className="mb-12">
-        <p className="font-label text-xs uppercase tracking-[0.2em] text-tertiary mb-2">Personal Reflection</p>
-        <h2 className="font-headline text-4xl md:text-5xl text-on-surface leading-tight font-bold italic">Journal</h2>
-        <div className="h-1 w-12 bg-primary mt-4 rounded-full" />
-      </header>
+    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        style={styles.content}
+      >
+        {/* Header */}
+        <View style={styles.header}>
+          <Text style={styles.headerLabel}>Personal Reflection</Text>
+          <Text style={styles.headerTitle}>My Journal</Text>
+        </View>
 
-      {/* Bento Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-        {/* Quick Action Card */}
-        <div className="md:col-span-12 bg-primary-container/20 rounded-xl p-8 flex flex-col md:flex-row items-center justify-between gap-6 border-none">
-          <div className="flex-1">
-            <h3 className="font-headline text-2xl text-on-primary-container mb-2">Capture a Moment</h3>
-            <p className="text-on-primary-container/80 text-sm max-w-md font-body leading-relaxed">
-              Let your thoughts flow onto the digital parchment. Reflections are the seeds of wisdom.
-            </p>
-          </div>
-          <button className="bg-primary text-on-primary px-8 py-4 rounded-full font-bold flex items-center gap-3 shadow-sm hover:opacity-90 transition-opacity">
-            <Plus className="w-5 h-5" />
-            <span>New Entry</span>
-          </button>
-        </div>
+        {/* Bento Grid */}
+        <View style={styles.grid}>
+          {/* Quick Action Card */}
+          <View style={styles.quickActionCard}>
+            <View style={styles.quickActionTextContainer}>
+              <Text style={styles.quickActionTitle}>Capture a Moment</Text>
+              <Text style={styles.quickActionDescription}>
+                Reflections are the seeds of wisdom. Let your thoughts flow.
+              </Text>
+            </View>
+            <TouchableOpacity style={styles.newEntryButton}>
+              <Plus size={20} color="var(--on-primary)" />
+              <Text style={styles.newEntryText}>New Entry</Text>
+            </TouchableOpacity>
+          </View>
 
-        {/* Entry 1 */}
-        <div className="md:col-span-8 bg-surface-container-low rounded-xl overflow-hidden group cursor-pointer">
-          <div className="aspect-[16/7] w-full overflow-hidden">
-            <img 
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQCHeRnTuTgF8TVb2cEGq9kmmgG2NV_yLWfKG8jNE_o1miubvo2bKTGsmMnYI6BXsUsB9o2I_VzunXqZbnaEXkX9Xt3KQw4my8d3m9nHPG2KKfeNk59nCr2feXUxhixWqwSjqF0kQ1Q7QsGivN80-aFNcqKOvyAT9MLjamtsFZJvqrCrogr4CbdO0zIw-pT-f05RHwKJ2cBNIG-ApxnnKUEDkrVExlBWpKYcqx6sFtGB4SjQGLzG1mpyKO5GTksTstmbR1fzOlbA8" 
-              alt="Sunset"
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-              referrerPolicy="no-referrer"
-            />
-          </div>
-          <div className="p-8">
-            <div className="flex justify-between items-start mb-4">
-              <span className="font-label text-[10px] uppercase tracking-widest text-primary font-bold bg-primary/10 px-2 py-1 rounded">
-                October 24, 2023
-              </span>
-              <MoreHorizontal className="w-5 h-5 text-stone-400" />
-            </div>
-            <h4 className="font-headline text-2xl text-on-surface mb-3 italic">Finding Stillness in the City</h4>
-            <p className="text-on-surface-variant font-body leading-relaxed line-clamp-3">
-              Today I walked through the park at dawn. The fog was thick, obscuring the skyscrapers and for a moment, the world felt ancient. It reminded me of Psalm 46:10. There is a specific kind of silence that only exists when the rest of the world is still asleep...
-            </p>
-          </div>
-        </div>
+          {/* Entry 1 */}
+          <TouchableOpacity style={styles.entryCardLarge}>
+            <View style={styles.entryImageContainer}>
+              <Image 
+                source={{ uri: "https://lh3.googleusercontent.com/aida-public/AB6AXuBQCHeRnTuTgF8TVb2cEGq9kmmgG2NV_yLWfKG8jNE_o1miubvo2bKTGsmMnYI6BXsUsB9o2I_VzunXqZbnaEXkX9Xt3KQw4my8d3m9nHPG2KKfeNk59nCr2feXUxhixWqwSjqF0kQ1Q7QsGivN80-aFNcqKOvyAT9MLjamtsFZJvqrCrogr4CbdO0zIw-pT-f05RHwKJ2cBNIG-ApxnnKUEDkrVExlBWpKYcqx6sFtGB4SjQGLzG1mpyKO5GTksTstmbR1fzOlbA8" }}
+                style={styles.entryImage}
+              />
+            </View>
+            <View style={styles.entryContent}>
+              <View style={styles.entryHeader}>
+                <View style={styles.dateBadge}>
+                  <Text style={styles.dateBadgeText}>October 24, 2023</Text>
+                </View>
+                <MoreHorizontal size={16} color="rgba(var(--outline-rgb), 0.4)" />
+              </View>
+              <Text style={styles.entryTitleLarge}>Finding Stillness in the City</Text>
+              <Text style={styles.entryExcerpt} numberOfLines={2}>
+                Today I walked through the park at dawn. The fog was thick, obscuring the skyscrapers and for a moment, the world felt ancient...
+              </Text>
+            </View>
+          </TouchableOpacity>
 
-        {/* Entry 2 */}
-        <div className="md:col-span-4 bg-secondary-container/30 rounded-xl p-8 flex flex-col cursor-pointer hover:bg-secondary-container/40 transition-colors">
-          <span className="font-label text-[10px] uppercase tracking-widest text-secondary font-bold mb-4">October 21, 2023</span>
-          <h4 className="font-headline text-xl text-on-secondary-container mb-4 italic">Gratitude for Small Mercies</h4>
-          <p className="text-on-secondary-container/90 font-body leading-relaxed text-sm mb-6 flex-grow">
-            The warmth of tea, the weight of a good book, and the kindness of a stranger at the market.
-          </p>
-          <div className="flex gap-2">
-            <span className="bg-surface-variant px-3 py-1 rounded-full text-[10px] font-label uppercase text-on-surface-variant">Daily</span>
-            <span className="bg-surface-variant px-3 py-1 rounded-full text-[10px] font-label uppercase text-on-surface-variant">Gratitude</span>
-          </div>
-        </div>
+          <View style={styles.secondaryGrid}>
+            {/* Entry 2 */}
+            <TouchableOpacity style={styles.entryCardSecondary}>
+              <Text style={styles.secondaryDate}>October 21, 2023</Text>
+              <Text style={styles.secondaryTitle}>Gratitude for Small Mercies</Text>
+              <Text style={styles.secondaryExcerpt}>
+                The warmth of tea, the weight of a good book, and the kindness of a stranger at the market.
+              </Text>
+              <View style={styles.tagContainer}>
+                <View style={styles.tag}>
+                  <Text style={styles.tagText}>Daily</Text>
+                </View>
+                <View style={styles.tag}>
+                  <Text style={styles.tagText}>Gratitude</Text>
+                </View>
+              </View>
+            </TouchableOpacity>
 
-        {/* Entry 3 */}
-        <div className="md:col-span-6 bg-white dark:bg-surface-container-lowest rounded-xl p-8 border border-outline-variant/10 cursor-pointer hover:bg-surface-container-low transition-colors">
-          <div className="flex items-center gap-3 mb-4">
-            <Book className="w-5 h-5 text-tertiary fill-current" />
-            <span className="font-label text-[10px] uppercase tracking-widest text-stone-500">October 18, 2023</span>
-          </div>
-          <h4 className="font-headline text-xl text-on-surface mb-3 italic">A Prayer for Guidance</h4>
-          <p className="text-on-surface-variant font-body leading-relaxed text-sm">
-            Feeling at a crossroads today. Choosing the path of patience over the path of speed. It is difficult to wait when my heart wants to run.
-          </p>
-        </div>
+            {/* Entry 3 */}
+            <TouchableOpacity style={styles.entryCardWhite}>
+              <View style={styles.entryIconHeader}>
+                <Book size={16} color="var(--tertiary)" />
+                <Text style={styles.iconHeaderText}>October 18, 2023</Text>
+              </View>
+              <Text style={styles.whiteTitle}>A Prayer for Guidance</Text>
+              <Text style={styles.whiteExcerpt}>
+                Feeling at a crossroads today. Choosing the path of patience over the path of speed. It is difficult to wait when my heart wants to run.
+              </Text>
+            </TouchableOpacity>
 
-        {/* Entry 4 */}
-        <div className="md:col-span-6 bg-white dark:bg-surface-container-lowest rounded-xl p-8 border border-outline-variant/10 cursor-pointer hover:bg-surface-container-low transition-colors">
-          <div className="flex items-center gap-3 mb-4">
-            <Sprout className="w-5 h-5 text-emerald-800 fill-current" />
-            <span className="font-label text-[10px] uppercase tracking-widest text-stone-500">October 15, 2023</span>
-          </div>
-          <h4 className="font-headline text-xl text-on-surface mb-3 italic">The Breath of the Woods</h4>
-          <p className="text-on-surface-variant font-body leading-relaxed text-sm">
-            Pine needles underfoot and the scent of damp earth. Nature doesn't hurry, yet everything is accomplished. Taking this lesson back home.
-          </p>
-        </div>
-      </div>
+            {/* Entry 4 */}
+            <TouchableOpacity style={styles.entryCardWhite}>
+              <View style={styles.entryIconHeader}>
+                <Sprout size={16} color="#065f46" />
+                <Text style={styles.iconHeaderText}>October 15, 2023</Text>
+              </View>
+              <Text style={styles.whiteTitle}>The Breath of the Woods</Text>
+              <Text style={styles.whiteExcerpt}>
+                Pine needles underfoot and the scent of damp earth. Nature doesn't hurry, yet everything is accomplished.
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
 
-      {/* Footer */}
-      <div className="mt-16 flex justify-center">
-        <button className="font-label text-xs uppercase tracking-[0.3em] text-tertiary hover:text-primary transition-colors flex flex-col items-center gap-2 group">
-          Explore Past Reflections
-          <ChevronDown className="w-5 h-5 group-hover:translate-y-1 transition-transform" />
-        </button>
-      </div>
-    </motion.div>
+        {/* Footer */}
+        <View style={styles.footer}>
+          <TouchableOpacity style={styles.pastReflectionsButton}>
+            <Text style={styles.pastReflectionsText}>Past Reflections</Text>
+            <ChevronDown size={16} color="var(--outline)" />
+          </TouchableOpacity>
+        </View>
+      </motion.div>
+    </ScrollView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  content: {
+    paddingHorizontal: 24,
+    paddingBottom: 40,
+  },
+  header: {
+    marginBottom: 40,
+  },
+  headerLabel: {
+    fontSize: 9,
+    textTransform: 'uppercase',
+    letterSpacing: 2.5,
+    color: 'var(--tertiary)',
+    fontWeight: '700',
+    marginBottom: 6,
+  },
+  headerTitle: {
+    fontSize: 32,
+    fontFamily: 'Georgia',
+    fontStyle: 'italic',
+    fontWeight: '700',
+    color: 'var(--on-surface)',
+  },
+  grid: {
+    gap: 16,
+  },
+  quickActionCard: {
+    backgroundColor: 'rgba(var(--primary-container-rgb), 0.2)',
+    borderRadius: 32,
+    padding: 24,
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: 'rgba(var(--primary-rgb), 0.05)',
+    gap: 16,
+  },
+  quickActionTextContainer: {
+    alignItems: 'center',
+    gap: 4,
+  },
+  quickActionTitle: {
+    fontSize: 20,
+    fontFamily: 'Georgia',
+    color: 'var(--on-primary-container)',
+    fontWeight: '600',
+  },
+  quickActionDescription: {
+    fontSize: 12,
+    color: 'rgba(var(--on-primary-container-rgb), 0.7)',
+    textAlign: 'center',
+    maxWidth: 240,
+    lineHeight: 18,
+  },
+  newEntryButton: {
+    width: '100%',
+    backgroundColor: 'var(--primary)',
+    height: 56,
+    borderRadius: 16,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 8,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+  },
+  newEntryText: {
+    color: 'var(--on-primary)',
+    fontSize: 14,
+    fontWeight: '700',
+  },
+  entryCardLarge: {
+    backgroundColor: 'var(--surface-container-low)',
+    borderRadius: 32,
+    overflow: 'hidden',
+  },
+  entryImageContainer: {
+    aspectRatio: 16/9,
+    width: '100%',
+  },
+  entryImage: {
+    width: '100%',
+    height: '100%',
+    resizeMode: 'cover',
+  },
+  entryContent: {
+    padding: 24,
+  },
+  entryHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 12,
+  },
+  dateBadge: {
+    backgroundColor: 'rgba(var(--primary-rgb), 0.1)',
+    paddingHorizontal: 8,
+    paddingVertical: 2,
+    borderRadius: 4,
+  },
+  dateBadgeText: {
+    fontSize: 8,
+    textTransform: 'uppercase',
+    letterSpacing: 1.5,
+    color: 'var(--primary)',
+    fontWeight: '700',
+  },
+  entryTitleLarge: {
+    fontSize: 20,
+    fontFamily: 'Georgia',
+    fontStyle: 'italic',
+    color: 'var(--on-surface)',
+    marginBottom: 8,
+    fontWeight: '600',
+  },
+  entryExcerpt: {
+    fontSize: 14,
+    color: 'var(--on-surface-variant)',
+    lineHeight: 22,
+  },
+  secondaryGrid: {
+    gap: 16,
+  },
+  entryCardSecondary: {
+    backgroundColor: 'rgba(var(--secondary-container-rgb), 0.2)',
+    borderRadius: 32,
+    padding: 24,
+    borderWidth: 1,
+    borderColor: 'rgba(var(--secondary-rgb), 0.05)',
+  },
+  secondaryDate: {
+    fontSize: 8,
+    textTransform: 'uppercase',
+    letterSpacing: 1.5,
+    color: 'var(--secondary)',
+    fontWeight: '700',
+    marginBottom: 12,
+  },
+  secondaryTitle: {
+    fontSize: 18,
+    fontFamily: 'Georgia',
+    fontStyle: 'italic',
+    color: 'var(--on-secondary-container)',
+    marginBottom: 8,
+    fontWeight: '600',
+  },
+  secondaryExcerpt: {
+    fontSize: 12,
+    color: 'rgba(var(--on-secondary-container-rgb), 0.8)',
+    lineHeight: 18,
+    marginBottom: 16,
+  },
+  tagContainer: {
+    flexDirection: 'row',
+    gap: 6,
+  },
+  tag: {
+    backgroundColor: 'rgba(var(--surface-variant-rgb), 0.5)',
+    paddingHorizontal: 10,
+    paddingVertical: 2,
+    borderRadius: 100,
+  },
+  tagText: {
+    fontSize: 8,
+    textTransform: 'uppercase',
+    color: 'var(--on-surface-variant)',
+    fontWeight: '700',
+  },
+  entryCardWhite: {
+    backgroundColor: 'var(--surface-container-lowest)',
+    borderRadius: 32,
+    padding: 24,
+    borderWidth: 1,
+    borderColor: 'rgba(var(--outline-variant-rgb), 0.1)',
+  },
+  entryIconHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+    marginBottom: 12,
+  },
+  iconHeaderText: {
+    fontSize: 8,
+    textTransform: 'uppercase',
+    letterSpacing: 1.5,
+    color: 'var(--outline)',
+    fontWeight: '700',
+  },
+  whiteTitle: {
+    fontSize: 18,
+    fontFamily: 'Georgia',
+    fontStyle: 'italic',
+    color: 'var(--on-surface)',
+    marginBottom: 8,
+    fontWeight: '600',
+  },
+  whiteExcerpt: {
+    fontSize: 12,
+    color: 'var(--on-surface-variant)',
+    lineHeight: 18,
+  },
+  footer: {
+    marginTop: 48,
+    alignItems: 'center',
+    paddingBottom: 32,
+  },
+  pastReflectionsButton: {
+    alignItems: 'center',
+    gap: 6,
+  },
+  pastReflectionsText: {
+    fontSize: 9,
+    textTransform: 'uppercase',
+    letterSpacing: 3,
+    color: 'var(--outline)',
+    fontWeight: '700',
+  },
+});
